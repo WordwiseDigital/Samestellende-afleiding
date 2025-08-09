@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="af">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Samestellende Afleiding • Graad 8 FAL</title>
+  <style>
+    :root{
+      --bg:#0f172a; --card:#111827; --ink:#f8fafc; --muted:#cbd5e1;
+      --accent:#22d3ee; --good:#22c55e; --bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+      background:linear-gradient(160deg,#0b1025,#121a3a 60%,#0b1025);
+      color:var(--ink);
+    }
+    header{padding:18px 20px;border-bottom:1px solid #1f2937;display:flex;gap:14px;align-items:center}
+    header h1{margin:0;font-size:20px;font-weight:700}
+    header .tag{font-size:12px;color:var(--muted);padding:2px 8px;border:1px solid #334155;border-radius:999px}
+    #app{max-width:1100px;margin:18px auto 64px;padding:0 16px}
+    .nav{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
+    .nav button{
+      background:#111827;border:1px solid #273143;color:var(--ink);padding:10px 14px;
+      border-radius:12px;cursor:pointer;font-weight:600
+    }
+    .nav button.active{border-color:var(--accent);box-shadow:0 0 0 2px #0ea5b8 inset}
+    .card{
+      background:linear-gradient(180deg,#0b1227,#0b0f1f); border:1px solid #1f2937; border-radius:16px;
+      padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.35)
+    }
+    h2{margin:0 0 12px;font-size:22px}
+    p{color:var(--muted);line-height:1.6}
+    .grid{display:grid;gap:14px}
+    @media(min-width:860px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+    .pill{display:inline-block;padding:6px 10px;border:1px dashed #334155;border-radius:10px;color:#93c5fd;font-size:13px;margin-right:6px}
+    .hl{color:#67e8f9}
+    .muted{color:var(--muted);font-size:14px}
+    .hint{color:#a1a1aa;font-style:italic;font-size:13px;margin:.2rem 0 .6rem}
+    .btn{background:#0b1227;border:1px solid #334155;color:var(--ink);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .btn.primary{border-color:var(--accent);box-shadow:0 0 0 2px #0ea5b8 inset}
+    .kpi{display:flex;gap:8px;align-items:center;padding:8px 10px;border:1px solid #273143;border-radius:12px}
+    .sep{height:1px;background:#1f2937;margin:14px 0}
+    .dragbank,.buckets{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{padding:8px 10px;border:1px solid #334155;border-radius:12px;background:#0f172a;cursor:grab}
+    .bucket{min-height:64px;flex:1;padding:10px;border:2px dashed #334155;border-radius:12px;background:#0b0f1f}
+    .bucket h4{margin:0 0 6px;font-size:14px;color:#a5b4fc}
+    .bucket.correct{border-color:var(--good)} .bucket.wrong{border-color:var(--bad)}
+    .small{font-size:13px}
+    .mcq .option{padding:10px;border:1px solid #334155;border-radius:12px;cursor:pointer;margin:8px 0}
+    .mcq .option.correct{border-color:var(--good)} .mcq .option.wrong{border-color:var(--bad)}
+    input[type="text"]{padding:10px;border-radius:10px;border:1px solid #334155;background:#0b0f1f;color:#fff}
+    footer{max-width:1100px;margin:28px auto 40px;padding:0 16px;color:#94a3b8;font-size:12px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Samestellende Afleiding</h1>
+    <span class="tag">Graad 8 • Afrikaans FAL • CAPS</span>
+    <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+      <div class="kpi" title="Punte"><span>⭐</span><span id="score">0</span></div>
+      <div class="kpi" title="Voltooi"><span>✅</span><span id="done">0</span>/4</div>
+      <button class="btn" id="resetBtn">Herstel</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <div class="nav">
+      <button data-tab="les" class="active">Les</button>
+      <button data-tab="sleep">Sleep & Los</button>
+      <button data-tab="mcq">Meerkeuse</button>
+      <button data-tab="kort">Kort antwoorde</button>
+      <button data-tab="toets">Eindtoets</button>
+      <button data-tab="result">Resultate</button>
+    </div>
+
+    <!-- LES -->
+    <section id="tab-les" class="card">
+      <h2>Wat is <span class="hl">samestellende afleiding</span>?</h2>
+      <p>’n <b>Samestellende afleiding</b> is ’n woord wat deur <b>samestelling</b> en <b>afleiding</b> gevorm word.  
+         Dit beteken dat jy eers twee of meer woorde kombineer (<i>samestelling</i>) en dan ’n voorvoegsel of agtervoegsel byvoeg (<i>afleiding</i>).</p>
+      <div class="grid cols-2">
+        <div>
+          <p class="pill">Struktuur</p>
+          <ul class="small">
+            <li>Woord 1 + Woord 2 = Samestelling</li>
+            <li>Voeg ’n voor-/agtervoegsel by = Afleiding</li>
+          </ul>
+          <p class="hint"><i>English: A compound word gets a prefix or suffix to make a new word.</i></p>
+        </div>
+        <div>
+          <p class="pill">Voorbeelde</p>
+          <ul class="small">
+            <li>skool + meisie + tjie → skoolmeisietjie</li>
+            <li>motor + bestuurder + s → motorbestuurders</li>
+            <li>boek + rak + ie → boekrakkie</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <h3>Belangrike wenke</h3>
+      <ul class="small">
+        <li>Let op hoe die samestelling eers gevorm word voor die afleiding.</li>
+        <li>Afleidings kan klein maak (-tjie, -ie), meervoud maak (-s, -e) of nuwe betekenis gee (-lik, -heid).</li>
+      </ul>
+    </section>
+
+    <!-- DRAG & DROP -->
+    <section id="tab-sleep" class="card" hidden>
+      <h2>Sleep & los: Is dit ’n Samestellende Afleiding?</h2>
+      <p class="muted">Plaas in die regte emmer. <span class="hint"><i>English: Drag each chip to Yes or No.</i></span></p>
+      <div class="dragbank" id="dragBank"></div>
+      <div class="grid cols-2 buckets" id="buckets"></div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+        <button class="btn primary" id="checkDrag">Merk</button>
+        <button class="btn" id="resetDrag">Herbegin</button>
+        <span id="dragMsg" class="muted"></span>
+      </div>
+    </section>
+
+    <!-- MCQ -->
+    <section id="tab-mcq" class="card" hidden>
+      <h2>Meerkeuse</h2>
+      <div id="mcqWrap"></div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+        <button class="btn primary" id="checkMcq">Merk</button>
+        <button class="btn" id="resetMcq">Herbegin</button>
+        <span id="mcqMsg" class="muted"></span>
+      </div>
+    </section>
+
+    <!-- SHORT ANSWERS -->
+    <section id="tab-kort" class="card" hidden>
+      <h2>Kort antwoorde</h2>
+      <div id="shortWrap"></div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+        <button class="btn primary" id="checkShort">Merk</button>
+        <button class="btn" id="resetShort">Herbegin</button>
+        <span id="shortMsg" class="muted"></span>
+      </div>
+    </section>
+
+    <!-- FINAL QUIZ -->
+    <section id="tab-toets" class="card" hidden>
+      <h2>Eindtoets</h2>
+      <div id="finalWrap"></div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+        <button class="btn primary" id="checkFinal">Merk</button>
+        <button class="btn" id="resetFinal">Herbegin</button>
+        <span id="finalMsg" class="muted"></span>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="tab-result" class="card" hidden>
+      <h2>Resultate & vordering</h2>
+      <div id="summary"></div>
+    </section>
+  </main>
+
+  <footer>
+    © WordWise • Les deur AI helper.
+  </footer>
+
+  <script>
+    // State
+    const state = { score:0, done:{} };
+    const save = () => {
+      document.getElementById("score").textContent = state.score;
+      document.getElementById("done").textContent = Object.keys(state.done).length;
+    };
+    save();
+    document.getElementById("resetBtn").addEventListener("click",()=>{ if(confirm("Herstel alles?")){state.score=0;state.done={};save();}});
+    // Nav
+    const tabs=["les","sleep","mcq","kort","toets","result"];
+    document.querySelectorAll(".nav button").forEach(b=>{
+      b.addEventListener("click",()=>{
+        document.querySelectorAll(".nav button").forEach(bb=>bb.classList.remove("active"));
+        b.classList.add("active");
+        const tab=b.dataset.tab;
+        tabs.forEach(t=>document.getElementById("tab-"+t).hidden=(t!==tab));
+        if(tab==="result") document.getElementById("summary").innerHTML=`<p>Punte: ${state.score}</p>`;
+      });
+    });
+    // Drag & Drop
+    const DRAG_ITEMS = [
+      {w:"motorbestuurders",cat:"ja"},
+      {w:"skoolmeisietjie",cat:"ja"},
+      {w:"boekrak",cat:"nee"},
+      {w:"ongelukkig",cat:"nee"},
+      {w:"boekrakkie",cat:"ja"},
+      {w:"hondhok",cat:"nee"},
+      {w:"plaaswerker",cat:"nee"},
+      {w:"plaaswerktjie",cat:"ja"}
+    ];
+    const BUCKETS=["ja","nee"];
+    const dragBank=document.getElementById("dragBank");
+    const bucketsWrap=document.getElementById("buckets");
+    const dragMsg=document.getElementById("dragMsg");
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    function renderDrag(){
+      dragBank.innerHTML=""; bucketsWrap.innerHTML="";
+      shuffle([...DRAG_ITEMS]).forEach((it,i)=>{
+        const chip=document.createElement("div"); chip.className="chip"; chip.textContent=it.w;
+        chip.draggable=true; chip.id="chip-"+i; chip.dataset.cat=it.cat;
+        chip.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",chip.id));
+        dragBank.appendChild(chip);
+      });
+      BUCKETS.forEach(cat=>{
+        const b=document.createElement("div"); b.className="bucket"; b.dataset.cat=cat;
+        b.addEventListener("dragover",e=>e.preventDefault());
+        b.addEventListener("drop",e=>{const id=e.dataTransfer.getData("text/plain"); b.appendChild(document.getElementById(id));});
+        b.innerHTML=`<h4>${cat.toUpperCase()}</h4>`; bucketsWrap.appendChild(b);
+      });
+      dragMsg.textContent="";
+    }
+    renderDrag();
+    document.getElementById("resetDrag").addEventListener("click",renderDrag);
+    document.getElementById("checkDrag").addEventListener("click",()=>{
+      let correct=0,total=DRAG_ITEMS.length;
+      document.querySelectorAll(".bucket").forEach(b=>{
+        const cat=b.dataset.cat;
+        let allGood=true;
+        [...b.querySelectorAll(".chip")].forEach(ch=>{if(ch.dataset.cat===cat){correct++;}else{allGood=false;}});
+        b.classList.toggle("correct", allGood && b.querySelector(".chip"));
+        b.classList.toggle("wrong", !allGood && b.querySelector(".chip"));
+      });
+      dragMsg.textContent=`Regte: ${correct}/${total}`;
+      if(correct===total){state.done.sleep=true;state.score+=10;save();}
+    });
+    // MCQ
+    const MCQ=[
+      {q:"Watter een is ’n samestellende afleiding?",a:"motorbestuurders",d:["motorhuis","bestuurder","motors"]},
+      {q:"Kies die korrekte ontleding vir 'boekrakkie'",a:"boek + rak + kie",d:["boek + rak","boek + kie","rak + kie"]},
+      {q:"’n Samestellende afleiding bestaan uit:",a:"Samestelling + Afleiding",d:["Afleiding + Afleiding","Samestelling + Samestelling","Een woord"]},
+    ];
+    const mcqWrap=document.getElementById("mcqWrap");
+    const mcqMsg=document.getElementById("mcqMsg");
+    function renderMcq(){
+      mcqWrap.innerHTML="";
+      shuffle([...MCQ]).forEach((m,i)=>{
+        const box=document.createElement("div"); box.className="mcq";
+        box.innerHTML=`<p><b>${i+1}.</b> ${m.q}</p>`;
+        shuffle([m.a,...m.d]).forEach(op=>{
+          const div=document.createElement("div"); div.className="option"; div.textContent=op; div.dataset.correct=(op===m.a);
+          div.addEventListener("click",()=>{[...box.querySelectorAll(".option")].forEach(o=>o.classList.remove("selected")); div.classList.add("selected");});
+          box.appendChild(div);
+        });
+        mcqWrap.appendChild(box);
+      });
+    }
+    renderMcq();
+    document.getElementById("resetMcq").addEventListener("click",renderMcq);
+    document.getElementById("checkMcq").addEventListener("click",()=>{
+      let correct=0,total=MCQ.length;
+      document.querySelectorAll(".mcq").forEach(block=>{
+        const sel=[...block.querySelectorAll(".option")].find(o=>o.classList.contains("selected"));
+        if(sel && sel.dataset.correct==="true"){correct++; sel.classList.add("correct");} else if(sel){sel.classList.add("wrong");}
+      });
+      mcqMsg.textContent=`Regte: ${correct}/${total}`;
+      if(correct===total){state.done.mcq=true;state.score+=10;save();}
+    });
+    // Short
+    const SHORT=[
+      {q:"Ontleed 'skoolmeisietjie'",answers:["skoolmeisie","skool + meisie + tjie","skoolmeisie + tjie"]},
+      {q:"Gee ’n voorbeeld van ’n samestellende afleiding",answers:["motorbestuurders","boekrakkie","skoolmeisietjie"]},
+    ];
+    const shortWrap=document.getElementById("shortWrap");
+    const shortMsg=document.getElementById("shortMsg");
+    function renderShort(){
+      shortWrap.innerHTML="";
+      SHORT.forEach((s,i)=>{
+        const row=document.createElement("div"); row.style.margin="10px 0";
+        row.innerHTML=`<p>${i+1}. ${s.q}</p><input data-i="${i}" type="text
