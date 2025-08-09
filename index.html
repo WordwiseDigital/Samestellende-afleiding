@@ -22,60 +22,6 @@
     .nav{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
     .nav button{
       background:#111827;border:1px solid #273143;color:var(--ink);padding:10px 14px;
-      border-radius:12px;cursor:pointer;font-weight:600
-    }
-    .nav button.active{border-color:var(--accent);box-shadow:0 0 0 2px #0ea5b8 inset}
-    .card{
-      background:linear-gradient(180deg,#0b1227,#0b0f1f); border:1px solid #1f2937; border-radius:16px;
-      padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.35)
-    }
-    h2{margin:0 0 12px;font-size:22px}
-    p{color:var(--muted);line-height:1.6}
-    .grid{display:grid;gap:14px}
-    @media(min-width:860px){.grid.cols-2{grid-template-columns:1fr 1fr}}
-    .pill{display:inline-block;padding:6px 10px;border:1px dashed #334155;border-radius:10px;color:#93c5fd;font-size:13px;margin-right:6px}
-    .hl{color:#67e8f9}
-    .muted{color:var(--muted);font-size:14px}
-    .hint{color:#a1a1aa;font-style:italic;font-size:13px;margin:.2rem 0 .6rem}
-    .btn{background:#0b1227;border:1px solid #334155;color:var(--ink);padding:8px 12px;border-radius:10px;cursor:pointer}
-    .btn.primary{border-color:var(--accent);box-shadow:0 0 0 2px #0ea5b8 inset}
-    .kpi{display:flex;gap:8px;align-items:center;padding:8px 10px;border:1px solid #273143;border-radius:12px}
-    .sep{height:1px;background:#1f2937;margin:14px 0}
-    .dragbank,.buckets{display:flex;gap:10px;flex-wrap:wrap}
-    .chip{padding:8px 10px;border:1px solid #334155;border-radius:12px;background:#0f172a;cursor:grab}
-    .bucket{min-height:64px;flex:1;padding:10px;border:2px dashed #334155;border-radius:12px;background:#0b0f1f}
-    .bucket h4{margin:0 0 6px;font-size:14px;color:#a5b4fc}
-    .bucket.correct{border-color:var(--good)} .bucket.wrong{border-color:var(--bad)}
-    .small{font-size:13px}
-    .mcq .option{padding:10px;border:1px solid #334155;border-radius:12px;cursor:pointer;margin:8px 0}
-    .mcq .option.correct{border-color:var(--good)} .mcq .option.wrong{border-color:var(--bad)}
-    input[type="text"]{padding:10px;border-radius:10px;border:1px solid #334155;background:#0b0f1f;color:#fff}
-    footer{max-width:1100px;margin:28px auto 40px;padding:0 16px;color:#94a3b8;font-size:12px}
-  </style>
-<!doctype html>
-<html lang="af">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Samestellende Afleiding • Graad 8 FAL</title>
-  <style>
-    :root{
-      --bg:#0f172a; --card:#111827; --ink:#f8fafc; --muted:#cbd5e1;
-      --accent:#22d3ee; --good:#22c55e; --bad:#ef4444;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
-      background:linear-gradient(160deg,#0b1025,#121a3a 60%,#0b1025);
-      color:var(--ink);
-    }
-    header{padding:18px 20px;border-bottom:1px solid #1f2937;display:flex;gap:14px;align-items:center}
-    header h1{margin:0;font-size:20px;font-weight:700}
-    header .tag{font-size:12px;color:var(--muted);padding:2px 8px;border:1px solid #334155;border-radius:999px}
-    #app{max-width:1100px;margin:18px auto 64px;padding:0 16px}
-    .nav{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
-    .nav button{
-      background:#111827;border:1px solid #273143;color:var(--ink);padding:10px 14px;
       border-radius:12px;cursor:pointer;font-weight:600;transition:.15s transform ease
     }
     .nav button:active{transform:scale(0.98)}
@@ -112,15 +58,21 @@
     .mcq .option.correct{border-color:var(--good)} .mcq .option.wrong{border-color:var(--bad)}
     input[type="text"]{padding:10px;border-radius:10px;border:1px solid #334155;background:#0b0f1f;color:#fff;width:100%}
     footer{max-width:1100px;margin:28px auto 40px;padding:0 16px;color:#94a3b8;font-size:12px;text-align:center}
+    /* Builder */
+    .swim{display:flex;flex-wrap:wrap;gap:10px}
+    .chip.solid{background:#0b1227;border-color:#42526b}
+    .chip.sel{box-shadow:0 0 0 2px #0ea5b8 inset}
+    .preview{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#0a0f20;border:1px solid #1f2937;border-radius:10px;padding:10px;color:#d1d5db}
   </style>
 </head>
 <body>
   <header>
     <h1>Samestellende Afleiding</h1>
     <span class="tag">Graad 8 • Afrikaans FAL • CAPS</span>
-    <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <div style="margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       <div class="kpi" title="Punte"><span>⭐</span><span id="score">0</span></div>
-      <div class="kpi" title="Voltooi"><span>✅</span><span id="done">0</span>/4</div>
+      <div class="kpi" title="Voltooi"><span>✅</span><span id="done">0</span>/5</div>
+      <button class="btn" id="muteBtn" title="Skakel klank aan/af">🔊 Sound On</button>
       <button class="btn" id="resetBtn">Herstel</button>
     </div>
   </header>
@@ -130,6 +82,7 @@
       <button data-tab="les" class="active">Les</button>
       <button data-tab="sleep">Sleep & Los</button>
       <button data-tab="mcq">Meerkeuse</button>
+      <button data-tab="bou">Bou-’n-woord</button>
       <button data-tab="kort">Kort antwoorde</button>
       <button data-tab="toets">Eindtoets</button>
       <button data-tab="result">Resultate</button>
@@ -161,7 +114,7 @@
       <h3>Belangrike wenke</h3>
       <ul class="small">
         <li>Ontleed eers die <b>basis-samestelling</b>, daarna die <b>afleidingsmorfeem</b>.</li>
-        <li>Afleidings kan kleinheid (‑tjie/‑ie), meervoud (‑e/‑s) of nuwe woordsoort/ betekenis (‑lik/‑heid) aandui.</li>
+        <li>Afleidings kan kleinheid (-tjie/-ie), meervoud (-e/-s) of nuwe woordsoort/ betekenis (-lik/-heid) aandui.</li>
       </ul>
       <p class="hint"><i>English: Look for the core compound first; then see what suffix/prefix was added.</i></p>
     </section>
@@ -188,6 +141,35 @@
         <button class="btn primary" id="checkMcq">Merk</button>
         <button class="btn" id="resetMcq">Herbegin</button>
         <span id="mcqMsg" class="muted"></span>
+      </div>
+    </section>
+
+    <!-- BUILDER -->
+    <section id="tab-bou" class="card" hidden>
+      <h2>Bou-’n-woord</h2>
+      <p class="muted">Bou die <b>teikenwoord</b> deur die regte voor-/agtervoegsel by die <b>basis-samestelling</b> te voeg.</p>
+      <p class="hint"><i>English: Build the goal word by adding the correct suffix or prefix to the base compound.</i></p>
+
+      <div class="sep"></div>
+      <div id="challengeMeta" class="small"></div>
+
+      <h3>1) Basis-samestelling</h3>
+      <div id="baseBank" class="swim" style="margin-bottom:8px"></div>
+
+      <h3>2) Voorvoegsels (opsioneel)</h3>
+      <div id="preBank" class="swim" style="margin-bottom:8px"></div>
+
+      <h3>3) Agtervoegsels</h3>
+      <div id="sufBank" class="swim" style="margin-bottom:8px"></div>
+
+      <h3>Voorskou</h3>
+      <div id="preview" class="preview">—</div>
+
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+        <button class="btn primary" id="checkBuild">Merk</button>
+        <button class="btn" id="resetBuild">Herbegin</button>
+        <button class="btn" id="nextBuild">Volgende</button>
+        <span id="buildMsg" class="muted"></span>
       </div>
     </section>
 
@@ -229,10 +211,29 @@
   </footer>
 
   <script>
-    // --------- Simple sound engine (no external files) ----------
+    // --------- Simple sound engine with mute ----------
     const AudioOK = window.AudioContext || window.webkitAudioContext;
+    const LSKEY="safl_";
     let actx;
+    let muted = localStorage.getItem(LSKEY+"mute")==="1";
+    const muteBtn = document.getElementById("muteBtn");
+    function updateMuteUI(){
+      if(muted){
+        muteBtn.textContent = "🔇 Muted";
+        muteBtn.title = "Skakel klank aan";
+      }else{
+        muteBtn.textContent = "🔊 Sound On";
+        muteBtn.title = "Skakel klank af";
+      }
+    }
+    updateMuteUI();
+    muteBtn.addEventListener("click", ()=>{
+      muted = !muted;
+      localStorage.setItem(LSKEY+"mute", muted ? "1" : "0");
+      updateMuteUI();
+    });
     function tone(freq=440, time=0.12, type="sine", vol=0.05){
+      if(muted) return;               // respect mute
       if(!AudioOK) return;
       if(!actx) actx=new AudioOK();
       const o=actx.createOscillator(), g=actx.createGain();
@@ -253,7 +254,6 @@
     });
 
     // --------- State (with localStorage) ----------
-    const LSKEY="safl_"; // samestellende afleiding
     const state = {
       score: Number(localStorage.getItem(LSKEY+"score")||0),
       done: JSON.parse(localStorage.getItem(LSKEY+"done")||"{}"),
@@ -269,7 +269,7 @@
     save();
 
     // --------- Nav ----------
-    const tabs=["les","sleep","mcq","kort","toets","result"];
+    const tabs=["les","sleep","mcq","bou","kort","toets","result"];
     document.querySelectorAll(".nav button").forEach(btn=>{
       btn.addEventListener("click", ()=>{
         document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
@@ -298,7 +298,7 @@
       {w:"boekrakkie",cat:"ja"},
       {w:"hondhok",cat:"nee"},
       {w:"plaaswerker",cat:"nee"},
-      {w:"plaaswerktjie",cat:"ja"}
+      {w:"plaaswerkertjie",cat:"ja"}
     ];
     const BUCKETS=["ja","nee"];
     const dragBank=document.getElementById("dragBank");
@@ -362,7 +362,7 @@
       {q:"Kies die korrekte ontleding vir “boekrakkie”.", a:"boek + rak + kie", d:["boek + rak","boek + kie","rak + kie"]},
       {q:"’n Samestellende afleiding bestaan uit:", a:"Samestelling + Afleiding", d:["Afleiding + Afleiding","Samestelling + Samestelling","Net een basiswoord"]},
       {q:"Watter woord wys eers samestelling en dan verkleining?", a:"skoolmeisietjie", d:["meisie","skoolmeisie","meisietjie"]},
-      {q:"Watter voorbeeld is NIE ’n samestellende afleiding nie?", a:"hondhok", d:["plaaswerktjie","boekrakkie","motorbestuurders"]}
+      {q:"Watter voorbeeld is NIE ’n samestellende afleiding nie?", a:"hondhok", d:["plaaswerkertjie","boekrakkie","motorbestuurders"]}
     ];
     const mcqWrap=document.getElementById("mcqWrap");
     const mcqMsg=document.getElementById("mcqMsg");
@@ -406,10 +406,111 @@
       }
     });
 
+    // --------- BUILDER (Bou-’n-woord) ----------
+    const CHALLENGES = [
+      {base:"skoolmeisie", goal:"skoolmeisietjie", allowedPrefixes:[], allowedSuffixes:["tjie"]},
+      {base:"boekrak", goal:"boekrakkie", allowedPrefixes:[], allowedSuffixes:["kie"]},
+      {base:"motorbestuurder", goal:"motorbestuurders", allowedPrefixes:[], allowedSuffixes:["s"]},
+      {base:"houtkapper", goal:"houtkappers", allowedPrefixes:[], allowedSuffixes:["s"]},
+      {base:"skoolbank", goal:"skoolbankie", allowedPrefixes:[], allowedSuffixes:["ie"]},
+      {base:"skoolhoof", goal:"skoolhoofde", allowedPrefixes:[], allowedSuffixes:["de"]},
+      {base:"fietsryer", goal:"fietsryers", allowedPrefixes:[], allowedSuffixes:["s"]},
+      {base:"bergklimmer", goal:"bergklimmers", allowedPrefixes:[], allowedSuffixes:["s"]},
+      {base:"waterbottel", goal:"waterbotteltjie", allowedPrefixes:[], allowedSuffixes:["tjie"]},
+      {base:"klipbank", goal:"klipbankie", allowedPrefixes:[], allowedSuffixes:["ie"]}
+    ];
+    const PREFIXES = ["on","be","ver","her","ge"];
+    const SUFFIXES = ["tjie","ie","kie","s","e","lik","heid","de"];
+    let chIndex=0, selBase=null, selPre=null, selSuf=null;
+
+    const elMeta=document.getElementById("challengeMeta");
+    const baseBank=document.getElementById("baseBank");
+    const preBank=document.getElementById("preBank");
+    const sufBank=document.getElementById("sufBank");
+    const preview=document.getElementById("preview");
+    const buildMsg=document.getElementById("buildMsg");
+
+    function renderBuilder(){
+      const ch = CHALLENGES[chIndex];
+      elMeta.innerHTML = `Uitdaging <b>${chIndex+1}</b> van <b>${CHALLENGES.length}</b> • Teikenwoord: <b>${ch.goal}</b>`;
+      const decoys = ["plaaswerker","skooltas","sonblom","boeksak"].filter(x=>x!==ch.base);
+      const pool = shuffle([ch.base, ...decoys]).slice(0,3);
+      baseBank.innerHTML="";
+      pool.forEach(b=>{
+        const btn = document.createElement("div");
+        btn.className="chip solid"; btn.textContent=b;
+        btn.addEventListener("click",()=>{ selBase=b; markSel(baseBank, btn); updatePreview(); sfx.click(); });
+        baseBank.appendChild(btn);
+      });
+      preBank.innerHTML="";
+      PREFIXES.forEach(p=>{
+        const btn=document.createElement("div");
+        btn.className="chip"; btn.textContent=p+"-";
+        btn.addEventListener("click",()=>{ selPre=(selPre===p? null:p); markSel(preBank, selPre?btn:null); updatePreview(); sfx.click(); });
+        preBank.appendChild(btn);
+      });
+      sufBank.innerHTML="";
+      SUFFIXES.forEach(s=>{
+        const btn=document.createElement("div");
+        btn.className="chip"; btn.textContent="-"+s;
+        btn.addEventListener("click",()=>{ selSuf=(selSuf===s? null:s); markSel(sufBank, selSuf?btn:null); updatePreview(); sfx.click(); });
+        sufBank.appendChild(btn);
+      });
+      selBase=null; selPre=null; selSuf=null; updatePreview(); buildMsg.textContent="";
+      markSel(baseBank,null); markSel(preBank,null); markSel(sufBank,null);
+    }
+    function markSel(container, node){
+      [...container.children].forEach(c=>c.classList.remove("sel"));
+      if(node) node.classList.add("sel");
+    }
+    function buildWord(){
+      if(!selBase) return "";
+      const pre = selPre ? selPre : "";
+      const suf = selSuf ? selSuf : "";
+      return (pre ? pre : "") + selBase + (suf ? (suf) : "");
+    }
+    function updatePreview(){
+      const w = buildWord();
+      preview.textContent = w || "—";
+    }
+    document.getElementById("resetBuild").addEventListener("click", ()=>{ renderBuilder(); sfx.click(); });
+
+    document.getElementById("checkBuild").addEventListener("click", ()=>{
+      const ch = CHALLENGES[chIndex];
+      const w = buildWord();
+      if(!w){ buildMsg.textContent="Kies ’n basis en ’n agtervoegsel."; sfx.wrong(); return; }
+      if(w.toLowerCase() === ch.goal.toLowerCase()){
+        buildMsg.textContent="Mooi! Reg gebou ✅";
+        sfx.success();
+      } else {
+        buildMsg.textContent=`Nog nie reg nie. Probeer weer. (Jou woord: ${w})`;
+        sfx.wrong();
+        return;
+      }
+    });
+
+    document.getElementById("nextBuild").addEventListener("click", ()=>{
+      const ch = CHALLENGES[chIndex];
+      const w = buildWord();
+      if(w.toLowerCase() !== ch.goal.toLowerCase()){
+        buildMsg.textContent="Merk eers die korrekte woord voordat jy voortgaan.";
+        sfx.wrong(); return;
+      }
+      if(chIndex < CHALLENGES.length-1){
+        chIndex++; renderBuilder();
+      } else {
+        buildMsg.textContent="Alle uitdagings voltooi! 🎉";
+        sfx.success();
+        if(!state.done.bou){ state.done.bou=true; state.score+=10; save(); }
+      }
+    });
+
+    renderBuilder();
+
     // --------- Short Answers ----------
     const SHORT = [
       {q:"Ontleed <b>skoolmeisietjie</b> (gebruik + tussen dele):", answers:["skool + meisie + tjie","skoolmeisie + tjie","skool + meisietjie"]},
-      {q:"Gee <b>een</b> voorbeeld van ’n samestellende afleiding:", answers:["motorbestuurders","boekrakkie","skoolmeisietjie","plaaswerktjie"]},
+      {q:"Gee <b>een</b> voorbeeld van ’n samestellende afleiding:", answers:["motorbestuurders","boekrakkie","skoolmeisietjie","plaaswerkertjie","skoolhoofde","fietsryers","bergklimmers","waterbotteltjie","klipbankie"]},
       {q:"Is <b>ongelukkig</b> ’n samestellende afleiding? Tik: ja/nee", answers:["nee","no"]},
       {q:"Vul in: <b>boek + rak + ?</b> → boekrak____ (skryf die agtervoegsel):", answers:["kie"]},
       {q:"Benoem die <b>afleidingsdeel</b> in <b>motorbestuurders</b>:", answers:["s","-s"]}
@@ -451,7 +552,7 @@
 
     // --------- Final Quiz ----------
     const FINAL = [
-      {type:"mcq", q:"Kies die beste voorbeeld van ’n samestellende afleiding:", a:"plaaswerktjie", d:["plaaswerk","werktjie","plaas + werk"]},
+      {type:"mcq", q:"Kies die beste voorbeeld van ’n samestellende afleiding:", a:"plaaswerkertjie", d:["plaaswerker","werktjie","plaas + werker"]},
       {type:"short", q:"Vul in: <b>hout + kap + er</b> → ________", answers:["houtkapper"]},
       {type:"mcq", q:"Watter woord WYS eers samestelling, dan meervoud?", a:"motorbestuurders", d:["bestuurder","motorbestuurder","motors"]},
       {type:"short", q:"Ontleed <b>boekrakkie</b> (met +):", answers:["boek + rak + kie","boek + rak + ie"]},
@@ -495,7 +596,6 @@
     document.getElementById("resetFinal").addEventListener("click", renderFinal);
     document.getElementById("checkFinal").addEventListener("click", ()=>{
       let correct=0,total=FINAL.length;
-      // MCQ
       finalWrap.querySelectorAll(".mcq").forEach(block=>{
         const options=[...block.querySelectorAll(".option")];
         options.forEach(o=>o.classList.remove("correct","wrong"));
@@ -504,7 +604,6 @@
         if(sel.dataset.correct==="true"){ correct++; sel.classList.add("correct"); sfx.correct(); }
         else { sel.classList.add("wrong"); sfx.wrong(); options.find(o=>o.dataset.correct==="true").classList.add("correct"); }
       });
-      // Short
       finalWrap.querySelectorAll("input[data-answers]").forEach(inp=>{
         const answers=JSON.parse(inp.dataset.answers);
         const ok = answers.map(a=>a.toLowerCase().trim()).includes(inp.value.toLowerCase().trim());
@@ -525,13 +624,14 @@
           <div class="card" style="background:#0a0f20">
             <h3>Jou punte</h3>
             <p class="kpi"><span>⭐</span> <b>${state.score}</b> totale punte</p>
-            <p class="muted small">+10 vir elke aktiwiteit (Sleep, MCQ, Kort) en +20 vir die Eindtoets.</p>
+            <p class="muted small">+10 vir Sleep, +10 vir MCQ, +10 vir Bou-’n-woord, +10 vir Kort antwoorde, +20 vir Eindtoets.</p>
           </div>
           <div class="card" style="background:#0a0f20">
             <h3>Voltooiing</h3>
             <ul class="small">
               <li>Sleep & Los: ${state.done.sleep ? "✅" : "⬜"}</li>
               <li>Meerkeuse: ${state.done.mcq ? "✅" : "⬜"}</li>
+              <li>Bou-’n-woord: ${state.done.bou ? "✅" : "⬜"}</li>
               <li>Kort antwoorde: ${state.done.kort ? "✅" : "⬜"}</li>
               <li>Eindtoets: ${state.done.toets ? "✅" : "⬜"}</li>
             </ul>
