@@ -1,30 +1,10 @@
-# Samestellende Afleiding • Graad 8 Afrikaans FAL
+# Samestellende Afleiding • Immediate Feedback Build
 
-Interaktiewe enkel-lêer web-app met les, oefeninge (sleep & los, meerkeuse, kort antwoorde), ’n Bou-’n-woord mini-speletjie en ’n eindtoets. **Klankeffekte** en nou ook ’n **Mute/Unmute**-knoppie (onthou jou keuse via localStorage). CAPS-belyn.
+Hierdie weergawe voeg **onmiddellike terugvoer** by:
+- 🟢 **Meerkeuse:** Keuse vergrendel en word **groen/rooi** met ’n status (“Reg/Verkeerd”). Regte antwoord word outomaties gemerk as jy verkeerd kies. ’n **Beantwoord x/y**-teller wys vordering.
+- 🟢 **Sleep & Los:** Elke skyfie kleur **groen/rooi** by neersit. Reg geplaas word **gesluit** (nie meer sleepbaar nie). Teller wys hoeveel reg is.
+- 🟢 **Kort antwoorde:** Valideer **by blur/Enter** en wys klein **“✅ Reg / ❌ Probeer weer”**-boodskap.
+- 🟢 **Eindtoets:** Selfde onmiddellike terugvoer per item, plus vorderingsteler.
+- 🔇 **Mute/Unmute**-knoppie bly beskikbaar (onthou keuse).
 
-## Gebruik
-- **Lokaal:** Maak `index.html` in jou blaaier oop.
-- **Moodle:** Voeg as *File* (Display → Embed) of *Page* met `<iframe src="...">`.
-- **GitHub Pages:** Sien afdeling onder.
-
-## Mute/Unmute
-- Skakel klank aan/af met die **🔊/🔇**-knoppie in die kop. Die instelling word gehou oor sessies heen.
-
-## GitHub Pages (Actions)
-1. Nuwe repo op GitHub (bv. `samestellende-afleiding-app`), default branch `main`.
-2. Push die inhoud:
-   ```bash
-   git clone <jou-repo-url>
-   cd samestellende-afleiding-app
-   # kopieer index.html + .github/workflows/pages.yml + README.md
-   git add .
-   git commit -m "init: app met mute/unmute"
-   git push origin main
-   ```
-3. *Settings → Pages* → Build and deployment: **GitHub Actions** (workflow ingesluit).
-
-## Alternatief (Deploy from branch)
-- *Settings → Pages → Build from branch* → `main` en root.
-
-## Lisensie
-- Vir opvoedkundige gebruik in klasse. Pas aan soos jy wil.
+Kopieer `index.html` na jou repo se root en commit. GitHub Pages publiseer outomaties via jou bestaande workflow.

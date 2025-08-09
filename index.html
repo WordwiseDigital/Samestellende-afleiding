@@ -5,59 +5,48 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Samestellende Afleiding • Graad 8 FAL</title>
   <style>
-    :root{
-      --bg:#0f172a; --card:#111827; --ink:#f8fafc; --muted:#cbd5e1;
-      --accent:#22d3ee; --good:#22c55e; --bad:#ef4444;
-    }
+    :root{ --bg:#0f172a; --card:#111827; --ink:#f8fafc; --muted:#cbd5e1; --accent:#22d3ee; --good:#22c55e; --bad:#ef4444; }
     *{box-sizing:border-box}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
-      background:linear-gradient(160deg,#0b1025,#121a3a 60%,#0b1025);
-      color:var(--ink);
-    }
-    header{padding:18px 20px;border-bottom:1px solid #1f2937;display:flex;gap:14px;align-items:center}
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; background:linear-gradient(160deg,#0b1025,#121a3a 60%,#0b1025); color:var(--ink); }
+    header{padding:18px 20px;border-bottom:1px solid #1f2937;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
     header h1{margin:0;font-size:20px;font-weight:700}
     header .tag{font-size:12px;color:var(--muted);padding:2px 8px;border:1px solid #334155;border-radius:999px}
     #app{max-width:1100px;margin:18px auto 64px;padding:0 16px}
     .nav{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 20px}
-    .nav button{
-      background:#111827;border:1px solid #273143;color:var(--ink);padding:10px 14px;
-      border-radius:12px;cursor:pointer;font-weight:600;transition:.15s transform ease
-    }
-    .nav button:active{transform:scale(0.98)}
-    .nav button.active{border-color:var(--accent);box-shadow:0 0 0 2px #0ea5b8 inset}
-    .card{
-      background:linear-gradient(180deg,#0b1227,#0b0f1f); border:1px solid #1f2937; border-radius:16px;
-      padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.35)
-    }
-    h2{margin:0 0 12px;font-size:22px}
-    p{color:var(--muted);line-height:1.6}
-    .grid{display:grid;gap:14px}
-    @media(min-width:860px){.grid.cols-2{grid-template-columns:1fr 1fr}}
+    .nav button{ background:#111827;border:1px solid #273143;color:var(--ink);padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:600;transition:.15s transform ease }
+    .nav button:active{transform:scale(0.98)} .nav button.active{border-color:var(--accent);box-shadow:0 0 0 2px #0ea5b8 inset}
+    .card{ background:linear-gradient(180deg,#0b1227,#0b0f1f); border:1px solid #1f2937; border-radius:16px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.35) }
+    h2{margin:0 0 12px;font-size:22px} p{color:var(--muted);line-height:1.6}
+    .grid{display:grid;gap:14px} @media(min-width:860px){.grid.cols-2{grid-template-columns:1fr 1fr}}
     .pill{display:inline-block;padding:6px 10px;border:1px dashed #334155;border-radius:10px;color:#93c5fd;font-size:13px;margin-right:6px}
-    .hl{color:#67e8f9}
-    .muted{color:var(--muted);font-size:14px}
-    .hint{color:#a1a1aa;font-style:italic;font-size:13px;margin:.2rem 0 .6rem}
+    .hl{color:#67e8f9} .muted{color:var(--muted);font-size:14px} .hint{color:#a1a1aa;font-style:italic;font-size:13px;margin:.2rem 0 .6rem}
     .btn{background:#0b1227;border:1px solid #334155;color:var(--ink);padding:8px 12px;border-radius:10px;cursor:pointer;transition:.15s transform ease}
-    .btn:active{transform:scale(0.98)}
-    .btn.primary{border-color:var(--accent);box-shadow:0 0 0 2px #0ea5b8 inset}
+    .btn:active{transform:scale(0.98)} .btn.primary{border-color:var(--accent);box-shadow:0 0 0 2px #0ea5b8 inset}
     .kpi{display:flex;gap:8px;align-items:center;padding:8px 10px;border:1px solid #273143;border-radius:12px}
     .sep{height:1px;background:#1f2937;margin:14px 0}
+    footer{max-width:1100px;margin:28px auto 40px;padding:0 16px;color:#94a3b8;font-size:12px;text-align:center}
     /* Drag & Drop */
     .dragbank,.buckets{display:flex;gap:10px;flex-wrap:wrap}
-    .chip{
-      padding:8px 10px;border:1px solid #334155;border-radius:12px;background:#0f172a;cursor:grab;user-select:none
-    }
-    .bucket{
-      min-height:64px;flex:1;padding:10px;border:2px dashed #334155;border-radius:12px;background:#0b0f1f
-    }
+    .chip{ padding:8px 10px;border:1px solid #334155;border-radius:12px;background:#0f172a;cursor:grab;user-select:none;display:inline-flex;gap:6px;align-items:center }
+    .chip.good{ border-color:var(--good); box-shadow:0 0 0 2px rgba(34,197,94,.2) inset }
+    .chip.bad{ border-color:var(--bad); box-shadow:0 0 0 2px rgba(239,68,68,.25) inset }
+    .chip .mark{font-size:12px;opacity:.9}
+    .bucket{ min-height:64px;flex:1;padding:10px;border:2px dashed #334155;border-radius:12px;background:#0b0f1f }
     .bucket h4{margin:0 0 6px;font-size:14px;color:#a5b4fc}
     .bucket.correct{border-color:var(--good)} .bucket.wrong{border-color:var(--bad)}
-    .small{font-size:13px}
-    .mcq .option{padding:10px;border:1px solid #334155;border-radius:12px;cursor:pointer;margin:8px 0}
-    .mcq .option.correct{border-color:var(--good)} .mcq .option.wrong{border-color:var(--bad)}
+    /* MCQ */
+    .mcq{margin-bottom:12px}
+    .mcq .qhead{display:flex;align-items:center;gap:8px}
+    .mcq .status{font-size:12px}
+    .mcq .option{padding:10px;border:1px solid #334155;border-radius:12px;cursor:pointer;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+    .mcq .option .badge{font-size:12px;opacity:.9}
+    .mcq .option.selected{outline:2px solid #475569}
+    .mcq .option.correct{border-color:var(--good);box-shadow:0 0 0 2px rgba(34,197,94,.2) inset}
+    .mcq .option.wrong{border-color:var(--bad);box-shadow:0 0 0 2px rgba(239,68,68,.25) inset}
+    .mcq.locked .option{pointer-events:none;opacity:.95}
+    /* Inputs */
     input[type="text"]{padding:10px;border-radius:10px;border:1px solid #334155;background:#0b0f1f;color:#fff;width:100%}
-    footer{max-width:1100px;margin:28px auto 40px;padding:0 16px;color:#94a3b8;font-size:12px;text-align:center}
+    .inline-status{font-size:12px;margin-top:4px}
     /* Builder */
     .swim{display:flex;flex-wrap:wrap;gap:10px}
     .chip.solid{background:#0b1227;border-color:#42526b}
@@ -135,10 +124,10 @@
     <!-- MCQ -->
     <section id="tab-mcq" class="card" hidden>
       <h2>Meerkeuse</h2>
-      <p class="muted">Kies die beste opsie. <span class="hint"><i>English: One correct answer each.</i></span></p>
+      <p class="muted">Kies die beste opsie. Antwoord **vergrendel** na jou keuse en jy kry dadelik terugvoer. <span class="hint"><i>English: Immediate feedback; answer locks.</i></span></p>
+      <div id="mcqProg" class="small muted" style="margin:.3rem 0 .6rem"></div>
       <div id="mcqWrap"></div>
       <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-        <button class="btn primary" id="checkMcq">Merk</button>
         <button class="btn" id="resetMcq">Herbegin</button>
         <span id="mcqMsg" class="muted"></span>
       </div>
@@ -176,10 +165,10 @@
     <!-- SHORT ANSWERS -->
     <section id="tab-kort" class="card" hidden>
       <h2>Kort antwoorde</h2>
-      <p class="muted">Tik die korrekte ontleding of voorbeeld. <span class="hint"><i>English: Answers are case-insensitive.</i></span></p>
+      <p class="muted">Tik die korrekte ontleding of voorbeeld. <b>Onmiddellike terugvoer</b> as jy klaar tik of fokus verloor.</p>
       <div id="shortWrap"></div>
+      <div id="shortProg" class="small muted" style="margin:.3rem 0 .6rem"></div>
       <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-        <button class="btn primary" id="checkShort">Merk</button>
         <button class="btn" id="resetShort">Herbegin</button>
         <span id="shortMsg" class="muted"></span>
       </div>
@@ -188,10 +177,10 @@
     <!-- FINAL QUIZ -->
     <section id="tab-toets" class="card" hidden>
       <h2>Eindtoets</h2>
-      <p class="muted">5 gemengde vrae. <span class="hint"><i>English: Mixed types.</i></span></p>
+      <p class="muted">Gemengde vrae met onmiddellike terugvoer per vraag.</p>
       <div id="finalWrap"></div>
+      <div id="finalProg" class="small muted" style="margin:.3rem 0 .6rem"></div>
       <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-        <button class="btn primary" id="checkFinal">Merk eindtoets</button>
         <button class="btn" id="resetFinal">Herbegin</button>
         <span id="finalMsg" class="muted"></span>
       </div>
@@ -206,91 +195,42 @@
     </section>
   </main>
 
-  <footer>
-    Created by Wordwise
-  </footer>
+  <footer>Created by Wordwise</footer>
 
   <script>
-    // --------- Simple sound engine with mute ----------
+    // ---------- Audio + Mute ----------
     const AudioOK = window.AudioContext || window.webkitAudioContext;
     const LSKEY="safl_";
     let actx;
     let muted = localStorage.getItem(LSKEY+"mute")==="1";
     const muteBtn = document.getElementById("muteBtn");
-    function updateMuteUI(){
-      if(muted){
-        muteBtn.textContent = "🔇 Muted";
-        muteBtn.title = "Skakel klank aan";
-      }else{
-        muteBtn.textContent = "🔊 Sound On";
-        muteBtn.title = "Skakel klank af";
-      }
-    }
+    function updateMuteUI(){ muteBtn.textContent = muted ? "🔇 Muted" : "🔊 Sound On"; }
     updateMuteUI();
-    muteBtn.addEventListener("click", ()=>{
-      muted = !muted;
-      localStorage.setItem(LSKEY+"mute", muted ? "1" : "0");
-      updateMuteUI();
-    });
-    function tone(freq=440, time=0.12, type="sine", vol=0.05){
-      if(muted) return;               // respect mute
-      if(!AudioOK) return;
-      if(!actx) actx=new AudioOK();
-      const o=actx.createOscillator(), g=actx.createGain();
-      o.type=type; o.frequency.value=freq;
-      g.gain.value=vol; o.connect(g); g.connect(actx.destination);
-      o.start();
-      g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime+time);
-      o.stop(actx.currentTime+time);
-    }
-    const sfx = {
-      click: ()=>tone(420,0.05,"triangle",0.04),
-      correct: ()=>{tone(660,0.08,"sine",0.06); setTimeout(()=>tone(880,0.08,"sine",0.05),90);},
-      wrong: ()=>{tone(180,0.08,"sawtooth",0.06); setTimeout(()=>tone(140,0.12,"sawtooth",0.05),80);},
-      success: ()=>{ [660,880,1040].forEach((f,i)=>setTimeout(()=>tone(f,0.09,"sine",0.07), i*120)); }
-    };
-    document.addEventListener("click", e=>{
-      if(e.target.classList && (e.target.classList.contains("btn") || e.target.closest(".nav"))) sfx.click();
-    });
+    muteBtn.addEventListener("click", ()=>{ muted=!muted; localStorage.setItem(LSKEY+"mute", muted?"1":"0"); updateMuteUI(); });
+    function tone(freq=440,time=0.12,type="sine",vol=0.05){ if(muted||!AudioOK) return; if(!actx) actx=new AudioOK(); const o=actx.createOscillator(),g=actx.createGain(); o.type=type;o.frequency.value=freq; g.gain.value=vol; o.connect(g); g.connect(actx.destination); o.start(); g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime+time); o.stop(actx.currentTime+time); }
+    const sfx={ click:()=>tone(420,0.05,"triangle",0.04), correct:()=>{tone(660,0.08,"sine",0.06); setTimeout(()=>tone(880,0.08,"sine",0.05),90);}, wrong:()=>{tone(180,0.08,"sawtooth",0.06); setTimeout(()=>tone(140,0.12,"sawtooth",0.05),80);}, success:()=>{[660,880,1040].forEach((f,i)=>setTimeout(()=>tone(f,0.09,"sine",0.07),i*120));} };
+    document.addEventListener("click", e=>{ if(e.target.classList && (e.target.classList.contains("btn")||e.target.closest(".nav"))) sfx.click(); });
 
-    // --------- State (with localStorage) ----------
-    const state = {
-      score: Number(localStorage.getItem(LSKEY+"score")||0),
-      done: JSON.parse(localStorage.getItem(LSKEY+"done")||"{}"),
-    };
-    const elScore = document.getElementById('score');
-    const elDone = document.getElementById('done');
-    function save(){
-      localStorage.setItem(LSKEY+"score", state.score);
-      localStorage.setItem(LSKEY+"done", JSON.stringify(state.done));
-      elScore.textContent = state.score;
-      elDone.textContent = Object.keys(state.done).length;
-    }
-    save();
+    // ---------- State ----------
+    const state={ score:Number(localStorage.getItem(LSKEY+"score")||0), done:JSON.parse(localStorage.getItem(LSKEY+"done")||"{}") };
+    const elScore=document.getElementById("score"), elDone=document.getElementById("done");
+    function save(){ localStorage.setItem(LSKEY+"score",state.score); localStorage.setItem(LSKEY+"done",JSON.stringify(state.done)); elScore.textContent=state.score; elDone.textContent=Object.keys(state.done).length; } save();
 
-    // --------- Nav ----------
+    // ---------- Nav ----------
     const tabs=["les","sleep","mcq","bou","kort","toets","result"];
     document.querySelectorAll(".nav button").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
-        btn.classList.add("active");
-        const tab = btn.dataset.tab;
-        tabs.forEach(t=>{ document.getElementById("tab-"+t).hidden = (t!==tab); });
+      btn.addEventListener("click",()=>{
+        document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active")); btn.classList.add("active");
+        const tab=btn.dataset.tab; tabs.forEach(t=>document.getElementById("tab-"+t).hidden=(t!==tab));
         if(tab==="result") renderSummary();
       });
     });
-
-    document.getElementById("resetBtn").addEventListener("click", ()=>{
-      if(confirm("Herstel punte en vordering?")){
-        localStorage.removeItem(LSKEY+"score");
-        localStorage.removeItem(LSKEY+"done");
-        state.score=0; state.done={}; save();
-        location.reload();
-      }
+    document.getElementById("resetBtn").addEventListener("click",()=>{
+      if(confirm("Herstel punte en vordering?")){ localStorage.removeItem(LSKEY+"score"); localStorage.removeItem(LSKEY+"done"); state.score=0; state.done={}; save(); location.reload(); }
     });
 
-    // --------- Drag & Drop ----------
-    const DRAG_ITEMS = [
+    // ---------- Drag & Drop (immediate feedback per drop) ----------
+    const DRAG_ITEMS=[
       {w:"motorbestuurders",cat:"ja"},
       {w:"skoolmeisietjie",cat:"ja"},
       {w:"boekrak",cat:"nee"},
@@ -301,113 +241,88 @@
       {w:"plaaswerkertjie",cat:"ja"}
     ];
     const BUCKETS=["ja","nee"];
-    const dragBank=document.getElementById("dragBank");
-    const bucketsWrap=document.getElementById("buckets");
-    const dragMsg=document.getElementById("dragMsg");
-
+    const dragBank=document.getElementById("dragBank"), bucketsWrap=document.getElementById("buckets"), dragMsg=document.getElementById("dragMsg");
     function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-
     function renderDrag(){
       dragBank.innerHTML=""; bucketsWrap.innerHTML="";
       shuffle([...DRAG_ITEMS]).forEach((it,i)=>{
         const chip=document.createElement("div");
         chip.className="chip"; chip.textContent=it.w; chip.draggable=true; chip.id="chip-"+i; chip.dataset.cat=it.cat;
-        chip.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain", chip.id));
+        const mark=document.createElement("span"); mark.className="mark"; mark.textContent=""; chip.appendChild(mark);
+        chip.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",chip.id));
         dragBank.appendChild(chip);
       });
       BUCKETS.forEach(cat=>{
         const b=document.createElement("div");
         b.className="bucket"; b.dataset.cat=cat;
-        b.addEventListener("dragover", e=>e.preventDefault());
-        b.addEventListener("drop", e=>{
-          const id=e.dataTransfer.getData("text/plain");
-          const node=document.getElementById(id);
-          b.appendChild(node);
-          sfx.click();
+        b.addEventListener("dragover",e=>e.preventDefault());
+        b.addEventListener("drop",e=>{
+          const id=e.dataTransfer.getData("text/plain"); const node=document.getElementById(id); b.appendChild(node); sfx.click();
+          const correct=(node.dataset.cat===cat);
+          node.classList.remove("good","bad");
+          node.querySelector(".mark").textContent=correct?"✅":"❌";
+          node.classList.add(correct?"good":"bad");
+          if(correct){ node.draggable=false; } // lock when correct
+          updateDragProgress();
         });
-        b.innerHTML=`<h4>${cat.toUpperCase()}</h4>`;
-        bucketsWrap.appendChild(b);
+        b.innerHTML=`<h4>${cat.toUpperCase()}</h4>`; bucketsWrap.appendChild(b);
       });
       dragMsg.textContent="";
-      document.querySelectorAll(".bucket").forEach(b=>b.classList.remove("correct","wrong"));
+    }
+    function updateDragProgress(){
+      const total=DRAG_ITEMS.length;
+      const placedGood=[...document.querySelectorAll(".chip.good")].length;
+      dragMsg.textContent=`Reg geplaas: ${placedGood}/${total}`;
+      if(placedGood===total){ sfx.success(); if(!state.done.sleep){state.done.sleep=true; state.score+=10; save();} }
     }
     renderDrag();
+    document.getElementById("resetDrag").addEventListener("click",renderDrag);
+    document.getElementById("checkDrag").addEventListener("click",updateDragProgress); // still available
 
-    document.getElementById("resetDrag").addEventListener("click", renderDrag);
-
-    document.getElementById("checkDrag").addEventListener("click", ()=>{
-      let correct=0, total=DRAG_ITEMS.length;
-      document.querySelectorAll(".bucket").forEach(b=>{
-        const cat=b.dataset.cat;
-        let allGood=true;
-        [...b.querySelectorAll(".chip")].forEach(ch=>{
-          if(ch.dataset.cat===cat){ correct++; } else { allGood=false; }
-        });
-        const hasChips=!!b.querySelector(".chip");
-        b.classList.toggle("correct", allGood && hasChips);
-        b.classList.toggle("wrong", !allGood && hasChips);
-      });
-      dragMsg.textContent = `Regte: ${correct}/${total}`;
-      if(correct===total){
-        sfx.success();
-        if(!state.done.sleep){ state.done.sleep=true; state.score+=10; save(); }
-      } else {
-        sfx.wrong();
-      }
-    });
-
-    // --------- MCQ ----------
-    const MCQ = [
+    // ---------- MCQ (immediate feedback + lock + progress) ----------
+    const MCQ=[
       {q:"Watter een is ’n samestellende afleiding?", a:"motorbestuurders", d:["motorhuis","bestuurder","motors"]},
       {q:"Kies die korrekte ontleding vir “boekrakkie”.", a:"boek + rak + kie", d:["boek + rak","boek + kie","rak + kie"]},
       {q:"’n Samestellende afleiding bestaan uit:", a:"Samestelling + Afleiding", d:["Afleiding + Afleiding","Samestelling + Samestelling","Net een basiswoord"]},
       {q:"Watter woord wys eers samestelling en dan verkleining?", a:"skoolmeisietjie", d:["meisie","skoolmeisie","meisietjie"]},
       {q:"Watter voorbeeld is NIE ’n samestellende afleiding nie?", a:"hondhok", d:["plaaswerkertjie","boekrakkie","motorbestuurders"]}
     ];
-    const mcqWrap=document.getElementById("mcqWrap");
-    const mcqMsg=document.getElementById("mcqMsg");
-
+    const mcqWrap=document.getElementById("mcqWrap"), mcqMsg=document.getElementById("mcqMsg"), mcqProg=document.getElementById("mcqProg");
     function renderMcq(){
-      mcqWrap.innerHTML="";
-      shuffle([...MCQ]).forEach((m,i)=>{
-        const box=document.createElement("div"); box.className="mcq";
-        box.innerHTML=`<p><b>${i+1}.</b> ${m.q}</p>`;
+      mcqWrap.innerHTML=""; MCQ.forEach((m,i)=>{
+        const box=document.createElement("div"); box.className="mcq"; box.dataset.index=i;
+        box.innerHTML=`<div class="qhead"><p><b>${i+1}.</b> ${m.q}</p><span class="status muted"></span></div>`;
         const opts=shuffle([m.a,...m.d]);
         opts.forEach(op=>{
-          const div=document.createElement("div");
-          div.className="option"; div.textContent=op; div.dataset.correct=(op===m.a);
-          div.addEventListener("click", ()=>{
-            [...box.querySelectorAll(".option")].forEach(o=>o.classList.remove("selected"));
-            div.classList.add("selected"); sfx.click();
+          const div=document.createElement("div"); div.className="option"; div.innerHTML=`<span>${op}</span><span class="badge"></span>`; div.dataset.correct=(op===m.a);
+          div.addEventListener("click",()=>{
+            if(box.classList.contains("locked")) return;
+            [...box.querySelectorAll(".option")].forEach(o=>o.classList.remove("selected","correct","wrong"));
+            div.classList.add("selected");
+            const ok = div.dataset.correct==="true";
+            if(ok){ div.classList.add("correct"); box.querySelector(".status").textContent="✅ Reg"; div.querySelector(".badge").textContent="Gekies"; sfx.correct(); }
+            else { div.classList.add("wrong"); box.querySelector(".status").textContent="❌ Verkeerd • Regte antwoord gemerk"; sfx.wrong(); box.querySelectorAll(".option").forEach(o=>{ if(o.dataset.correct==="true"){ o.classList.add("correct"); o.querySelector(".badge").textContent="Regte antwoord"; } }); }
+            box.classList.add("locked"); // lock after answer
+            updateMcqProgress();
           });
           box.appendChild(div);
         });
         mcqWrap.appendChild(box);
       });
-      mcqMsg.textContent="";
+      mcqMsg.textContent=""; updateMcqProgress();
+    }
+    function updateMcqProgress(){
+      const total=MCQ.length;
+      const locked=[...mcqWrap.querySelectorAll(".mcq.locked")].length;
+      const allCorrect=locked===total && [...mcqWrap.querySelectorAll(".mcq")].every(b=>b.querySelector(".option.correct") && !b.querySelector(".option.wrong.selected"));
+      mcqProg.textContent = `Beantwoord: ${locked}/${total}`;
+      if(allCorrect && !state.done.mcq){ state.done.mcq=true; state.score+=10; save(); sfx.success(); mcqMsg.textContent="Alles reg beantwoord! ✅"; }
     }
     renderMcq();
+    document.getElementById("resetMcq").addEventListener("click",renderMcq);
 
-    document.getElementById("resetMcq").addEventListener("click", renderMcq);
-    document.getElementById("checkMcq").addEventListener("click", ()=>{
-      let correct=0,total=MCQ.length;
-      document.querySelectorAll(".mcq").forEach(block=>{
-        const options=[...block.querySelectorAll(".option")];
-        options.forEach(o=>o.classList.remove("correct","wrong"));
-        const sel = options.find(o=>o.classList.contains("selected"));
-        if(!sel){ return; }
-        if(sel.dataset.correct==="true"){ correct++; sel.classList.add("correct"); sfx.correct(); }
-        else { sel.classList.add("wrong"); sfx.wrong(); options.find(o=>o.dataset.correct==="true").classList.add("correct"); }
-      });
-      mcqMsg.textContent=`Regte: ${correct}/${total}`;
-      if(correct===total){
-        if(!state.done.mcq){ state.done.mcq=true; state.score+=10; save(); }
-        sfx.success();
-      }
-    });
-
-    // --------- BUILDER (Bou-’n-woord) ----------
-    const CHALLENGES = [
+    // ---------- Builder (unchanged logic, keeps feedback) ----------
+    const CHALLENGES=[
       {base:"skoolmeisie", goal:"skoolmeisietjie", allowedPrefixes:[], allowedSuffixes:["tjie"]},
       {base:"boekrak", goal:"boekrakkie", allowedPrefixes:[], allowedSuffixes:["kie"]},
       {base:"motorbestuurder", goal:"motorbestuurders", allowedPrefixes:[], allowedSuffixes:["s"]},
@@ -419,205 +334,120 @@
       {base:"waterbottel", goal:"waterbotteltjie", allowedPrefixes:[], allowedSuffixes:["tjie"]},
       {base:"klipbank", goal:"klipbankie", allowedPrefixes:[], allowedSuffixes:["ie"]}
     ];
-    const PREFIXES = ["on","be","ver","her","ge"];
-    const SUFFIXES = ["tjie","ie","kie","s","e","lik","heid","de"];
+    const PREFIXES=["on","be","ver","her","ge"], SUFFIXES=["tjie","ie","kie","s","e","lik","heid","de"];
     let chIndex=0, selBase=null, selPre=null, selSuf=null;
-
-    const elMeta=document.getElementById("challengeMeta");
-    const baseBank=document.getElementById("baseBank");
-    const preBank=document.getElementById("preBank");
-    const sufBank=document.getElementById("sufBank");
-    const preview=document.getElementById("preview");
-    const buildMsg=document.getElementById("buildMsg");
-
+    const elMeta=document.getElementById("challengeMeta"), baseBank=document.getElementById("baseBank"), preBank=document.getElementById("preBank"), sufBank=document.getElementById("sufBank"), preview=document.getElementById("preview"), buildMsg=document.getElementById("buildMsg");
     function renderBuilder(){
-      const ch = CHALLENGES[chIndex];
-      elMeta.innerHTML = `Uitdaging <b>${chIndex+1}</b> van <b>${CHALLENGES.length}</b> • Teikenwoord: <b>${ch.goal}</b>`;
-      const decoys = ["plaaswerker","skooltas","sonblom","boeksak"].filter(x=>x!==ch.base);
-      const pool = shuffle([ch.base, ...decoys]).slice(0,3);
-      baseBank.innerHTML="";
-      pool.forEach(b=>{
-        const btn = document.createElement("div");
-        btn.className="chip solid"; btn.textContent=b;
-        btn.addEventListener("click",()=>{ selBase=b; markSel(baseBank, btn); updatePreview(); sfx.click(); });
-        baseBank.appendChild(btn);
-      });
-      preBank.innerHTML="";
-      PREFIXES.forEach(p=>{
-        const btn=document.createElement("div");
-        btn.className="chip"; btn.textContent=p+"-";
-        btn.addEventListener("click",()=>{ selPre=(selPre===p? null:p); markSel(preBank, selPre?btn:null); updatePreview(); sfx.click(); });
-        preBank.appendChild(btn);
-      });
-      sufBank.innerHTML="";
-      SUFFIXES.forEach(s=>{
-        const btn=document.createElement("div");
-        btn.className="chip"; btn.textContent="-"+s;
-        btn.addEventListener("click",()=>{ selSuf=(selSuf===s? null:s); markSel(sufBank, selSuf?btn:null); updatePreview(); sfx.click(); });
-        sufBank.appendChild(btn);
-      });
-      selBase=null; selPre=null; selSuf=null; updatePreview(); buildMsg.textContent="";
-      markSel(baseBank,null); markSel(preBank,null); markSel(sufBank,null);
+      const ch=CHALLENGES[chIndex]; elMeta.innerHTML=`Uitdaging <b>${chIndex+1}</b> van <b>${CHALLENGES.length}</b> • Teikenwoord: <b>${ch.goal}</b>`;
+      const decoys=["plaaswerker","skooltas","sonblom","boeksak"].filter(x=>x!==ch.base); const pool=shuffle([ch.base,...decoys]).slice(0,3);
+      baseBank.innerHTML=""; pool.forEach(b=>{ const btn=document.createElement("div"); btn.className="chip solid"; btn.textContent=b; btn.addEventListener("click",()=>{ selBase=b; markSel(baseBank,btn); updatePreview(); sfx.click(); }); baseBank.appendChild(btn); });
+      preBank.innerHTML=""; PREFIXES.forEach(p=>{ const btn=document.createElement("div"); btn.className="chip"; btn.textContent=p+"-"; btn.addEventListener("click",()=>{ selPre=(selPre===p?null:p); markSel(preBank, selPre?btn:null); updatePreview(); sfx.click(); }); preBank.appendChild(btn); });
+      sufBank.innerHTML=""; SUFFIXES.forEach(s=>{ const btn=document.createElement("div"); btn.className="chip"; btn.textContent="-"+s; btn.addEventListener("click",()=>{ selSuf=(selSuf===s?null:s); markSel(sufBank, selSuf?btn:null); updatePreview(); sfx.click(); }); sufBank.appendChild(btn); });
+      selBase=null; selPre=null; selSuf=null; updatePreview(); buildMsg.textContent=""; markSel(baseBank,null); markSel(preBank,null); markSel(sufBank,null);
     }
-    function markSel(container, node){
-      [...container.children].forEach(c=>c.classList.remove("sel"));
-      if(node) node.classList.add("sel");
-    }
-    function buildWord(){
-      if(!selBase) return "";
-      const pre = selPre ? selPre : "";
-      const suf = selSuf ? selSuf : "";
-      return (pre ? pre : "") + selBase + (suf ? (suf) : "");
-    }
-    function updatePreview(){
-      const w = buildWord();
-      preview.textContent = w || "—";
-    }
-    document.getElementById("resetBuild").addEventListener("click", ()=>{ renderBuilder(); sfx.click(); });
-
-    document.getElementById("checkBuild").addEventListener("click", ()=>{
-      const ch = CHALLENGES[chIndex];
-      const w = buildWord();
-      if(!w){ buildMsg.textContent="Kies ’n basis en ’n agtervoegsel."; sfx.wrong(); return; }
-      if(w.toLowerCase() === ch.goal.toLowerCase()){
-        buildMsg.textContent="Mooi! Reg gebou ✅";
-        sfx.success();
-      } else {
-        buildMsg.textContent=`Nog nie reg nie. Probeer weer. (Jou woord: ${w})`;
-        sfx.wrong();
-        return;
-      }
-    });
-
-    document.getElementById("nextBuild").addEventListener("click", ()=>{
-      const ch = CHALLENGES[chIndex];
-      const w = buildWord();
-      if(w.toLowerCase() !== ch.goal.toLowerCase()){
-        buildMsg.textContent="Merk eers die korrekte woord voordat jy voortgaan.";
-        sfx.wrong(); return;
-      }
-      if(chIndex < CHALLENGES.length-1){
-        chIndex++; renderBuilder();
-      } else {
-        buildMsg.textContent="Alle uitdagings voltooi! 🎉";
-        sfx.success();
-        if(!state.done.bou){ state.done.bou=true; state.score+=10; save(); }
-      }
-    });
-
+    function markSel(container,node){ [...container.children].forEach(c=>c.classList.remove("sel")); if(node) node.classList.add("sel"); }
+    function buildWord(){ if(!selBase) return ""; return (selPre?selPre:"") + selBase + (selSuf?selSuf:""); }
+    function updatePreview(){ const w=buildWord(); preview.textContent=w||"—"; }
+    document.getElementById("resetBuild").addEventListener("click",()=>{ renderBuilder(); sfx.click(); });
+    document.getElementById("checkBuild").addEventListener("click",()=>{ const ch=CHALLENGES[chIndex]; const w=buildWord(); if(!w){ buildMsg.textContent="Kies ’n basis en ’n agtervoegsel."; sfx.wrong(); return; } if(w.toLowerCase()===ch.goal.toLowerCase()){ buildMsg.textContent="Mooi! Reg gebou ✅"; sfx.success(); } else { buildMsg.textContent=`Nog nie reg nie. Probeer weer. (Jou woord: ${w})`; sfx.wrong(); } });
+    document.getElementById("nextBuild").addEventListener("click",()=>{ const ch=CHALLENGES[chIndex]; const w=buildWord(); if(w.toLowerCase()!==ch.goal.toLowerCase()){ buildMsg.textContent="Merk eers die korrekte woord voordat jy voortgaan."; sfx.wrong(); return; } if(chIndex<CHALLENGES.length-1){ chIndex++; renderBuilder(); } else { buildMsg.textContent="Alle uitdagings voltooi! 🎉"; sfx.success(); if(!state.done.bou){ state.done.bou=true; state.score+=10; save(); } } });
     renderBuilder();
 
-    // --------- Short Answers ----------
-    const SHORT = [
+    // ---------- Short answers (immediate) ----------
+    const SHORT=[
       {q:"Ontleed <b>skoolmeisietjie</b> (gebruik + tussen dele):", answers:["skool + meisie + tjie","skoolmeisie + tjie","skool + meisietjie"]},
       {q:"Gee <b>een</b> voorbeeld van ’n samestellende afleiding:", answers:["motorbestuurders","boekrakkie","skoolmeisietjie","plaaswerkertjie","skoolhoofde","fietsryers","bergklimmers","waterbotteltjie","klipbankie"]},
       {q:"Is <b>ongelukkig</b> ’n samestellende afleiding? Tik: ja/nee", answers:["nee","no"]},
       {q:"Vul in: <b>boek + rak + ?</b> → boekrak____ (skryf die agtervoegsel):", answers:["kie"]},
       {q:"Benoem die <b>afleidingsdeel</b> in <b>motorbestuurders</b>:", answers:["s","-s"]}
     ];
-    const shortWrap=document.getElementById("shortWrap");
-    const shortMsg=document.getElementById("shortMsg");
-
+    const shortWrap=document.getElementById("shortWrap"), shortMsg=document.getElementById("shortMsg"), shortProg=document.getElementById("shortProg");
     function renderShort(){
       shortWrap.innerHTML="";
       SHORT.forEach((s,i)=>{
-        const row=document.createElement("div");
-        row.style.margin="10px 0";
+        const row=document.createElement("div"); row.style.margin="10px 0";
         row.innerHTML = `<p>${i+1}. ${s.q}</p>
-          <input data-i="${i}" type="text" placeholder="Jou antwoord" />`;
+          <input data-i="${i}" type="text" placeholder="Jou antwoord" />
+          <div class="inline-status muted"></div>`;
+        const el=row.querySelector("input"); const status=row.querySelector(".inline-status");
+        function validate(){ const ok = SHORT[i].answers.map(a=>a.toLowerCase().trim()).includes(el.value.toLowerCase().trim()); el.style.borderColor = ok ? "#22c55e" : (el.value? "#ef4444" : "#334155"); status.textContent = el.value ? (ok?"✅ Reg":"❌ Probeer weer") : ""; if(ok) sfx.correct(); }
+        el.addEventListener("blur", validate);
+        el.addEventListener("change", validate);
+        el.addEventListener("keyup", e=>{ if(e.key==="Enter") validate(); });
         shortWrap.appendChild(row);
       });
-      shortMsg.textContent="";
+      shortMsg.textContent=""; updateShortProgress();
+    }
+    function updateShortProgress(){
+      const total=SHORT.length;
+      const answered=[...shortWrap.querySelectorAll("input")].filter(i=>i.value.trim()!=="").length;
+      shortProg.textContent = `Beantwoord: ${answered}/${total}`;
+      const allCorrect = [...shortWrap.querySelectorAll(".inline-status")].filter(s=>s.textContent.startsWith("✅")).length===total;
+      if(allCorrect && !state.done.kort){ state.done.kort=true; state.score+=10; save(); sfx.success(); shortMsg.textContent="Alles reg! ✅"; }
     }
     renderShort();
+    document.getElementById("resetShort").addEventListener("click",renderShort);
+    shortWrap.addEventListener("input", updateShortProgress);
 
-    function norm(s){ return s.trim().toLowerCase(); }
-
-    document.getElementById("resetShort").addEventListener("click", renderShort);
-    document.getElementById("checkShort").addEventListener("click", ()=>{
-      const inputs=[...shortWrap.querySelectorAll("input")];
-      let correct=0;
-      inputs.forEach(inp=>{
-        const i=Number(inp.dataset.i);
-        const ok = SHORT[i].answers.map(norm).includes(norm(inp.value));
-        inp.style.borderColor = ok ? "#22c55e" : "#ef4444";
-        if(ok){ correct++; sfx.correct(); } else { sfx.wrong(); }
-      });
-      shortMsg.textContent=`Regte: ${correct}/${SHORT.length}`;
-      if(correct===SHORT.length){
-        if(!state.done.kort){ state.done.kort=true; state.score+=10; save(); }
-        sfx.success();
-      }
-    });
-
-    // --------- Final Quiz ----------
-    const FINAL = [
+    // ---------- Final quiz (immediate per question) ----------
+    const FINAL=[
       {type:"mcq", q:"Kies die beste voorbeeld van ’n samestellende afleiding:", a:"plaaswerkertjie", d:["plaaswerker","werktjie","plaas + werker"]},
       {type:"short", q:"Vul in: <b>hout + kap + er</b> → ________", answers:["houtkapper"]},
       {type:"mcq", q:"Watter woord WYS eers samestelling, dan meervoud?", a:"motorbestuurders", d:["bestuurder","motorbestuurder","motors"]},
       {type:"short", q:"Ontleed <b>boekrakkie</b> (met +):", answers:["boek + rak + kie","boek + rak + ie"]},
       {type:"short", q:"Skryf JA of NEE: <b>hondhok</b> is ’n samestellende afleiding.", answers:["nee","no"]}
     ];
-    const finalWrap=document.getElementById("finalWrap");
-    const finalMsg=document.getElementById("finalMsg");
-
+    const finalWrap=document.getElementById("finalWrap"), finalMsg=document.getElementById("finalMsg"), finalProg=document.getElementById("finalProg");
     function renderFinal(){
       finalWrap.innerHTML="";
-      shuffle([...FINAL]).forEach((f,idx)=>{
+      FINAL.forEach((f,idx)=>{
         if(f.type==="mcq"){
-          const box=document.createElement("div");
-          box.className="mcq";
-          box.innerHTML=`<p><b>${idx+1}.</b> ${f.q}</p>`;
+          const box=document.createElement("div"); box.className="mcq"; box.dataset.index=idx;
+          box.innerHTML=`<div class="qhead"><p><b>${idx+1}.</b> ${f.q}</p><span class="status muted"></span></div>`;
           const opts=shuffle([f.a,...f.d]);
           opts.forEach(op=>{
-            const div=document.createElement("div");
-            div.className="option";
-            div.textContent=op;
-            div.dataset.correct=(op===f.a);
+            const div=document.createElement("div"); div.className="option"; div.innerHTML=`<span>${op}</span><span class="badge"></span>`; div.dataset.correct=(op===f.a);
             div.addEventListener("click",()=>{
-              [...box.querySelectorAll(".option")].forEach(o=>o.classList.remove("selected"));
-              div.classList.add("selected"); sfx.click();
+              if(box.classList.contains("locked")) return;
+              [...box.querySelectorAll(".option")].forEach(o=>o.classList.remove("selected","correct","wrong"));
+              div.classList.add("selected");
+              const ok = div.dataset.correct==="true";
+              if(ok){ div.classList.add("correct"); box.querySelector(".status").textContent="✅ Reg"; div.querySelector(".badge").textContent="Gekies"; sfx.correct(); }
+              else { div.classList.add("wrong"); box.querySelector(".status").textContent="❌ Verkeerd • Regte antwoord gemerk"; sfx.wrong(); box.querySelectorAll(".option").forEach(o=>{ if(o.dataset.correct==="true"){ o.classList.add("correct"); o.querySelector(".badge").textContent="Regte antwoord"; } }); }
+              box.classList.add("locked"); updateFinalProgress();
             });
             box.appendChild(div);
           });
           finalWrap.appendChild(box);
         } else {
-          const row=document.createElement("div");
-          row.style.margin="10px 0";
+          const row=document.createElement("div"); row.style.margin="10px 0";
           row.innerHTML = `<p><b>${idx+1}.</b> ${f.q}</p>
-            <input type="text" data-answers='${JSON.stringify(f.answers)}' placeholder="Antwoord" />`;
+            <input type="text" data-answers='${JSON.stringify(f.answers)}' placeholder="Antwoord" />
+            <div class="inline-status muted"></div>`;
+          const el=row.querySelector("input"); const status=row.querySelector(".inline-status");
+          function validate(){ const answers=JSON.parse(el.dataset.answers); const ok=answers.map(a=>a.toLowerCase().trim()).includes(el.value.toLowerCase().trim()); el.style.borderColor = ok ? "#22c55e" : (el.value? "#ef4444" : "#334155"); status.textContent = el.value ? (ok?"✅ Reg":"❌ Probeer weer") : ""; if(ok) sfx.correct(); }
+          el.addEventListener("blur", validate); el.addEventListener("change", validate); el.addEventListener("keyup", e=>{ if(e.key==="Enter") validate(); });
           finalWrap.appendChild(row);
         }
       });
-      finalMsg.textContent="";
+      finalMsg.textContent=""; updateFinalProgress();
+    }
+    function updateFinalProgress(){
+      const total=FINAL.length;
+      const answeredMCQ=[...finalWrap.querySelectorAll(".mcq.locked")].length;
+      const answeredShort=[...finalWrap.querySelectorAll(".inline-status")].filter(s=>s.textContent!=="").length - [...finalWrap.querySelectorAll(".mcq .status")].length;
+      const answered=answeredMCQ + answeredShort;
+      finalProg.textContent = `Beantwoord: ${answered}/${total}`;
+      const allCorrect = [...finalWrap.querySelectorAll(".mcq")].every(b=>b.querySelector(".option.correct") && !b.querySelector(".option.wrong.selected")) &&
+                         [...finalWrap.querySelectorAll("input[data-answers]")].every(el=>{
+                           const answers=JSON.parse(el.dataset.answers); return answers.map(a=>a.toLowerCase().trim()).includes(el.value.toLowerCase().trim());
+                         });
+      if(allCorrect && !state.done.toets){ state.done.toets=true; state.score+=20; save(); sfx.success(); finalMsg.textContent="Alles reg! ✅"; }
     }
     renderFinal();
+    document.getElementById("resetFinal").addEventListener("click",renderFinal);
 
-    document.getElementById("resetFinal").addEventListener("click", renderFinal);
-    document.getElementById("checkFinal").addEventListener("click", ()=>{
-      let correct=0,total=FINAL.length;
-      finalWrap.querySelectorAll(".mcq").forEach(block=>{
-        const options=[...block.querySelectorAll(".option")];
-        options.forEach(o=>o.classList.remove("correct","wrong"));
-        const sel = options.find(o=>o.classList.contains("selected"));
-        if(!sel){ return; }
-        if(sel.dataset.correct==="true"){ correct++; sel.classList.add("correct"); sfx.correct(); }
-        else { sel.classList.add("wrong"); sfx.wrong(); options.find(o=>o.dataset.correct==="true").classList.add("correct"); }
-      });
-      finalWrap.querySelectorAll("input[data-answers]").forEach(inp=>{
-        const answers=JSON.parse(inp.dataset.answers);
-        const ok = answers.map(a=>a.toLowerCase().trim()).includes(inp.value.toLowerCase().trim());
-        inp.style.borderColor = ok ? "#22c55e" : "#ef4444";
-        if(ok){ correct++; sfx.correct(); } else { sfx.wrong(); }
-      });
-      finalMsg.textContent=`Regte: ${correct}/${total}`;
-      if(correct===total){
-        if(!state.done.toets){ state.done.toets=true; state.score+=20; save(); }
-        sfx.success();
-      }
-    });
-
-    // --------- Results ----------
+    // ---------- Results ----------
     function renderSummary(){
       const s = `
         <div class="grid cols-2">
